@@ -1,0 +1,32 @@
+[
+    {
+        "model": "articles.article",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "title": "ù ��",
+            "content": "�ݰ��ݰ�����!!...",
+            "image": "",
+            "created_at": "2023-04-12T00:08:26.396Z",
+            "updated_at": "2023-04-12T00:08:26.396Z",
+            "like_users": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "articles.article",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "title": "min�̰� ���ž�",
+            "content": "anmin�ƴϾ�~..!!",
+            "image": "",
+            "created_at": "2023-04-12T00:09:16.191Z",
+            "updated_at": "2023-04-12T00:09:16.191Z",
+            "like_users": [
+                1
+            ]
+        }
+    }
+]
