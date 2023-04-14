@@ -1,0 +1,38 @@
+<style>
+  a{
+    text-decoration: none !important;
+  }
+</style>
+
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+  <h1><b>MOVIE REVIEWS</h1></b>
+  <a href="{% url 'movies:create' %}">리뷰 남기기</a>
+  <hr>
+  {% for movie in movies %}
+
+  <h2><a href="{% url 'movies:detail' movie.pk %}" style="color:deeppink" text-decoration: none !important; ><p>{{ movie.title }}</p></a></h2>
+
+  
+
+  <div>
+    <form action="{% url 'movies:likes' movie.pk %}" method="post">
+      {% csrf_token %}
+      {% if user in movie.movie_like_users.all %}
+        <button class="btn btn-danger btn-sm"><i class="far fa-heart"></i></button>
+      {% else %}
+        <button class="btn btn-danger btn-sm"><i class="fas fa-heart"></i></button>
+      {% endif %}
+    </form>
+    <br>
+    <span>{{ movie.movie_like_users.all|length }} 명이 이 글을 좋아합니다.</span>
+    <br>
+    <h6><a href="{% url 'accounts:profile' movie.user_id.username %}">작성자 {{movie.user_id}}님의 프로필</a></h6>
+  </div>
+
+    
+    <hr>
+  {% endfor %}
+{% endblock %}

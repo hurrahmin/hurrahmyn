@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+  <h1 style="color:deeppink"><b> {{person.username}}님의 프로필 </h1></b>
+  <div>
+    팔로잉 : {{person.user_followings.count}} | 팔로워 :  {{person.user_followers.count}}
+  </div>
+  <br>
+
+  <form action='{% url 'accounts:follow' person.username %}' method='post'>
+    {% csrf_token %}
+    {% if request.user in person.user_followers.all %}
+      <button type="submit" class="btn btn-danger"> 팔로우 끊기 </button>
+    {% else %}
+      <button type="submit" class="btn btn-success"> 팔로우 하기 </button>
+    {% endif %}
+  </form>
+  <br>
+  <h5><b> {{person.username}}의 게시글</h5></b>
+  {% for movie in person.movie_set.all %}
+    <p> {{movie.title}} </p>
+
+  <hr>
+
+  <h5><b> {{person.username}}이 남긴 댓글 </h5></b>
+  {% for comment in person.comment_set.all %}
+    <p> {{comment.content}} </p>
+  {% endfor %}
+  <hr>
+
+  <a href="{% url 'movies:index' %}" class="btn btn-secondary btn-sm"> 홈으로 이동하기 </a>
+  {% endfor %}
+
+{% endblock content %}
