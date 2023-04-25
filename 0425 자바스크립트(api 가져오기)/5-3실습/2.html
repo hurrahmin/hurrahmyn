@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>인기영화들</h1>
+  <div></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const movie_URL= 'https://api.themoviedb.org/3/movie/popular?api_key=f421a03f8d7402a5ff6f00dd423f4a84&language=ko-KR&page=1'
+    
+    function getMovie(event) {
+      axios.get(movie_URL)
+      .then((response) => {
+        const list = response.data.results
+        const divElem = document.querySelector('div')
+
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].vote_average >= 8) {
+            const titleElem = document.createElement('p')
+            titleElem.innerText = list[i].title
+            divElem.appendChild(titleElem)
+          }
+          
+        }
+      })
+    }
+    getMovie()
+</script>
+</body>
+</html>
