@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Movies</h1>
+  <form id="genre_form">
+    <label for="genre">좋아하는 장르를 선택하세요:</label>
+    <select id="genre" name="genre">
+      <option value="">선택하세요</option>
+      {% for genre in genres %}
+      <option value={{genre.pk}}>{{genre.name}}</option>
+      
+      {% endfor %}
+    </select>
+    <button type="submit">검색</button>
+  </form>
+
+  {% if request.user.is_authenticated %}
+    <a href = "{% url 'community:create' %}">[create]</a>
+  {% else %}
+    <a href = "{% url 'accounts:login' %}">[로그인 먼저 하세요]</a>
+  {% endif %}
+<hr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for movie in movies %}
+    <div class="col">
+      <div class="card h-100">
+        <a href="{% url 'movies:detail' movie.pk %}" ><img src="{{movie.poster_path}}" class="card-img-top" style="height: 500px;" alt="..."> </a>
+        <div class="card-body">
+          <h5 class="card-title">{{movie.title}}</h5>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    const form = document.querySelector('#genre_form')
+    form.addEventListener('submit', function(event) {
+      event.preventDefault()
+      const pk = document.querySelector('#genre').value
+      window.location.href = `http://127.0.0.1:8000/movies/recommended/${pk}`
+    })
+  </script>
+{% endblock script %}
