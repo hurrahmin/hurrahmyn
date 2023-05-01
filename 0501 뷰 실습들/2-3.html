@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1> Todo List </h1>
+    <input type="text" v-model="content" @keyup.enter ="plus">
+    <button @click="plus">+</button>
+
+      <ul>
+        <li v-for="todo in todos"><input type="checkbox" v-model="todo.completed" class="completed"><span :class="{completed: todo.completed}">{{todo.content}}</span></li>
+      </ul>
+      <button @click="tddelete"> 완료 목록 삭제하기 </button>
+
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [],
+        content:""
+      },
+      methods: {
+        plus: function() {
+          this.todos.push({"content" : this.content, "completed": false})
+          this.content=""
+        },
+        tddelete() {
+          this.todos = this.todos.filter((todo) => {
+            return !todo.completed;
+          })
+        }
+      },
+
+    })
+  </script>
+</body>
+</html>
