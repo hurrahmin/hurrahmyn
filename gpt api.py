@@ -2,7 +2,7 @@ import requests
 import json
 
 # OpenAI API 키
-API_KEY = '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'
+API_KEY = ''
 
 # API 요청 URL
 url = 'https://api.openai.com/v1/chat/completions'
