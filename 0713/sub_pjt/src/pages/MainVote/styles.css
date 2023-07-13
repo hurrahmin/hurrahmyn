@@ -1,0 +1,23 @@
+.TabPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.DivLine {
+    border-bottom: solid 1px black;
+}
+
+h2 {
+    text-align: center;
+  }
+
+h3 {
+    text-align: center;
+}
+
+.for_img{
+    width: 200px;
+    height: 200px;
+}
