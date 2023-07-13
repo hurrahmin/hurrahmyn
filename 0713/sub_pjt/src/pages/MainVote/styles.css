@@ -21,3 +21,9 @@ h3 {
     width: 200px;
     height: 200px;
 }
+
+.for_cateimg{
+    width: auto;
+    height: 300px;
+    margin: 10px;
+}

@@ -7,22 +7,22 @@ const Header = () => {
     <div className="header">
       <ul className="wrapper">
         <li>
-          <Link to="/MainVote">LOGO</Link>
+          <Link to="/MainVote" className="font">LOGO</Link>
         </li>
         <li>
-          <Link to="/MainVote">Vote</Link>
+          <Link to="/MainVote" className="font">VOTE</Link>
         </li>
         <li>
-          <Link to="/MyVote">MyVote</Link>
+          <Link to="/MyVote" className="font">My VOTE</Link>
         </li>
         <li>
-          <Link to="/CreateVote">Create a Vote</Link>
+          <Link to="/CreateVote" className="font">Create a VOTE</Link>
         </li>
         <li>
-          <Link to="/SearchVote">SearchVote</Link>
+          <Link to="/SearchVote" className="font">Search VOTE</Link>
         </li>
         <li>
-          <Link to="/Auth">Sign In</Link>
+          <Link to="/Auth" className="font">Sign In</Link>
         </li>
       </ul>
     </div>
