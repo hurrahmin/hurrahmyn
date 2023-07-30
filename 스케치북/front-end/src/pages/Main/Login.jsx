@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Link } from 'react-router-dom';
 import Wrapper from "./styles";
 
 export default function Login() {
-  const [useremail, setUseremail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [warning, setWarning] = React.useState("");
-  const [passwordwarning, setPasswordWarning] = React.useState("");
+  const [useremail, setUseremail] = useState("");
+  const [password, setPassword] = useState("");
+  const [warning, setWarning] = useState("");
+  const [passwordwarning, setPasswordWarning] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-  const passwordRegEx = /^[a-zA-z0-9]{8,20}$/;
+  const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
 
   const emailCheck = (username) => {
     const isValidEmail = emailRegEx.test(username);
@@ -24,27 +25,32 @@ export default function Login() {
   };
 
   const passwordCheck = (password) => {
-    if(password.match(passwordRegEx)===null) {
+    if (password.match(passwordRegEx) === null) {
       setPasswordWarning('비밀번호 형식이 일치하지 않습니다.');
-      return;
     } else {
       setPasswordWarning('');
     }
-  }
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <Wrapper>
       <div className="login">
         <div className="login-signup-buttons">
+        <Link to="/main/login" style={{ textDecoration: "none", color: "gray" }}>
           <h3 className='activated'>로그인</h3>
-          <Link to="/signup" style={{ textDecoration: "none", color: "gray"  }} > 
+          </Link>
+          <Link to="/main/signup" style={{ textDecoration: "none", color: "gray" }}>
             <h3>회원가입</h3>
           </Link>
         </div>
 
         <form>
           <div>
-            <InputGroup style={{height: '45px'}}>
+            <InputGroup style={{ height: '45px', marginBottom: '10px' }}>
               <Form.Control
                 placeholder="이메일"
                 aria-label="useremail"
@@ -59,17 +65,26 @@ export default function Login() {
           </div>
 
           <div>
-            <InputGroup style={{height: '45px'}}>
+            <InputGroup style={{ height: '45px' }}>
               <Form.Control
+                type={showPassword ? "text" : "password"}
                 placeholder="비밀번호"
                 aria-label="password"
                 style={{ backgroundColor: "#E6E6E6" }}
-                onChange={(e)=>{setPassword(e.target.value); 
-                  passwordCheck(e.target.value)}} 
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  passwordCheck(e.target.value);
+                }}
               />
+              <InputGroup.Text
+                onClick={handleShowPassword}
+                style={{ cursor: 'pointer' }}
+              >
+                <i className={showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+              </InputGroup.Text>
             </InputGroup>
             <span className='warningmsg'>{passwordwarning}</span>
-
           </div>
 
           <button type="submit" className='start'>시작하기</button>

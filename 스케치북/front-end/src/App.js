@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // CSS
 import "./App.css";
 import Main from "./pages/Main/index";
+import MainSecond from "./pages/MainSecond/index";
 import Password from "./pages/Password/index";
 import Connect from "./pages/Connect/index";
 import Guide from "./pages/Guide/index";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/main/login",
     element: <Main />,
+  },
+  {
+    path: "/main/signup",
+    element: <MainSecond />,
   },
   {
     path: "/password",
